@@ -1,0 +1,17 @@
+# templates/l2advertisements.yaml
+
+{{- if .Values.l2Advertisements }}
+{{- range .Values.l2Advertisements }}
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: {{ .name }}
+  namespace: {{ .namespace }}
+spec:
+  ipAddressPools:
+{{- range .ipAddressPools }}
+    - {{ . }}
+{{- end }}
+---
+{{- end }}
+{{- end }}

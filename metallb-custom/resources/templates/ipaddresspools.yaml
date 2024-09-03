@@ -1,0 +1,17 @@
+# templates/ipaddresspools.yaml
+
+{{- if .Values.ipAddressPools }}
+{{- range .Values.ipAddressPools }}
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: {{ .name }}
+  namespace: {{ .namespace }}
+spec:
+  addresses:
+{{- range .addresses }}
+    - {{ . }}
+{{- end }}
+---
+{{- end }}
+{{- end }}
